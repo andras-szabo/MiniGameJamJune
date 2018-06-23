@@ -10,12 +10,14 @@ public class DudeMover : MonoBehaviour
 	private Rigidbody2D anchorRB;
 
 	private Vector3 _dudePointerInitialPosition;
+	private Vector3 _dudeAnchorInitialPosition;
 
 	private void Awake()
 	{
 		pointerRB = dudePointer.GetComponent<Rigidbody2D>();
 		anchorRB = dudeAnchor.GetComponent<Rigidbody2D>();
 		_dudePointerInitialPosition = dudePointer.position;
+		_dudeAnchorInitialPosition = dudeAnchor.position;
 		pointerRB.freezeRotation = false;
 	}
 
@@ -29,7 +31,7 @@ public class DudeMover : MonoBehaviour
 	{
 		pointerRB.freezeRotation = false;
 		DrunkLevel = 0f;
-		dudeAnchor.position = Vector3.zero;
+		dudeAnchor.position = _dudeAnchorInitialPosition;
 		anchorRB.velocity = Vector3.zero;
 		anchorRB.angularVelocity = 0f;
 
