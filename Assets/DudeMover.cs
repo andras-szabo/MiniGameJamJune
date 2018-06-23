@@ -6,21 +6,34 @@ public class DudeMover : MonoBehaviour
 	public Transform dudeAnchor;
 	public Transform dudePointer;
 
+    private Rigidbody2D pointerRB;
+    private Rigidbody2D anchorRB;
+
 	private Vector3 _dudePointerInitialPosition;
 
 	private void Awake()
 	{
-		_dudePointerInitialPosition = dudePointer.position;
+        pointerRB = dudePointer.GetComponent<Rigidbody2D>();
+        anchorRB = dudeAnchor.GetComponent<Rigidbody2D>();
+        _dudePointerInitialPosition = dudePointer.position;
 	}
 
-	public void Reset()
+    public void Fallen()
+    {
+        pointerRB.freezeRotation = true;
+        anchorRB.velocity = Vector3.zero;
+
+    }
+
+
+    public void Reset()
 	{
 		DrunkLevel = 0f;
 		dudeAnchor.position = Vector3.zero;
-		dudeAnchor.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+		anchorRB.velocity = Vector3.zero;
 
 		dudePointer.SetPositionAndRotation(_dudePointerInitialPosition, Quaternion.identity);
-		dudePointer.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
-		dudePointer.GetComponent<Rigidbody2D>().angularVelocity = 0f;
+		pointerRB.velocity = Vector3.zero;
+		pointerRB.angularVelocity = 0f;
 	}
 }

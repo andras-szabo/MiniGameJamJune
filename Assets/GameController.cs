@@ -33,5 +33,6 @@ public class GameController : MonoBehaviour
 	public void GameOver(bool win)
 	{
 		Debug.Log("Game over, did you win? " + win);
+        dude.Fallen();
 	}
 }
