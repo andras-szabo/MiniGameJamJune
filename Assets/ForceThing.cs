@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -9,7 +8,6 @@ public class ForceThing : MonoBehaviour
 	public float forceFactor = 2f;
 	public bool applyConstantForce;
 	public Vector2 myConstantForce;
-	public float drunkLevel;
 	public float drunkImpulsePeriodSeconds;
 
 	private float _previousForce;
@@ -33,7 +31,7 @@ public class ForceThing : MonoBehaviour
 		var force = Input.GetAxis("Horizontal") * forceFactor;
 		force = applyConstantForce ? -force : force;
 
-		if (!applyConstantForce || drunkLevel > 0f)
+		if (!applyConstantForce || GameController.Instance.DrunkLevel > 0f)
 		{
 			rb.AddForce(new Vector2(force, 0f));
 		}
@@ -44,9 +42,9 @@ public class ForceThing : MonoBehaviour
 		while (true)
 		{
 			rb.AddForce(new Vector2(_previousForce, 0f));
-
+			var drunkLevel = GameController.Instance.DrunkLevel;
 			var moveToRightForce = drunkLevel * myConstantForce.x * 0.75f;
-			var randomChange = GetRandomDrunkennessQuotient();
+			var randomChange = GetRandomDrunkennessQuotient(drunkLevel);
 			var finalForce = moveToRightForce + randomChange;
 			rb.AddForce(new Vector2(finalForce, 0f));
 
@@ -56,7 +54,7 @@ public class ForceThing : MonoBehaviour
 		}
 	}
 
-	private float GetRandomDrunkennessQuotient()
+	private float GetRandomDrunkennessQuotient(float drunkLevel)
 	{
 		return Random.Range(-drunkLevel, drunkLevel) * myConstantForce.x * 0.5f;
 	}
