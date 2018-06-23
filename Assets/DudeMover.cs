@@ -23,8 +23,9 @@ public class DudeMover : MonoBehaviour
 
 	public void Fallen()
 	{
+        pointerRB.isKinematic = true;
 		pointerRB.freezeRotation = true;
-		anchorRB.velocity = Vector3.zero;
+		anchorRB.isKinematic = true;
 	}
 
 	public void Reset()

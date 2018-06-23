@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - dude
+  - lady
   layers:
   - Default
   - TransparentFX

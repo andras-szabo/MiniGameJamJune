@@ -16,8 +16,9 @@ public class GameController : MonoBehaviour
 	public DudeAnimator dudeAnimator;
 
 	public static GameController Instance;
+    public bool locked = true;
 
-	public float DrunkLevel { get; private set; }
+    public float DrunkLevel { get; private set; }
 
 	private void Awake()
 	{
@@ -44,6 +45,7 @@ public class GameController : MonoBehaviour
 		{
 			DrunkLevel += drunkIncrement;
 			dudeAnimator.MakeDudeDrink();
+            locked = false;
 		}
 
 		if (Input.GetKeyDown(KeyCode.Escape))
@@ -55,6 +57,11 @@ public class GameController : MonoBehaviour
 	public void GameOver(bool win)
 	{
 		Debug.Log("Game over, did you win? " + win);
-        dude.Fallen();
+        if (!win)
+        {
+            dude.Fallen();
+        }
+        locked = true;
+
 	}
 }
