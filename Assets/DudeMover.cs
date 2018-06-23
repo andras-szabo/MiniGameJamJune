@@ -21,15 +21,16 @@ public class DudeMover : MonoBehaviour
 		pointerRB.freezeRotation = false;
 	}
 
-	public void Fallen()
+	public void Fallen(bool deactivate)
 	{
-        pointerRB.isKinematic = true;
-		pointerRB.freezeRotation = true;
-		anchorRB.isKinematic = true;
+        pointerRB.isKinematic = deactivate;
+		pointerRB.freezeRotation = deactivate;
+		anchorRB.isKinematic = deactivate;
 	}
 
 	public void Reset()
 	{
+        Fallen(false);
 		pointerRB.freezeRotation = false;
 		DrunkLevel = 0f;
 		dudeAnchor.position = _dudeAnchorInitialPosition;

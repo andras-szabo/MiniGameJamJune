@@ -1,10 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class GameController : MonoBehaviour 
 {
 	public float timeLimit = 15f;
+
+
+    private bool gameOver;
+
+    [SerializeField]
+    private GameObject loosingPanel;
+
+
+    [SerializeField]
+    private Image winImage;
 
 	[Range(1f, 12f)]
 	public float drunkIncrement = 1f;
@@ -28,6 +40,9 @@ public class GameController : MonoBehaviour
 
 	public void Reset(bool startResetAgain = true)
 	{
+
+        winImage.gameObject.SetActive(false);
+        gameOver = false;
 		DrunkLevel = 0f;
 		dude.Reset();
 		if (startResetAgain)
@@ -35,6 +50,9 @@ public class GameController : MonoBehaviour
 			StartCoroutine(CallResetAgainRoutine());
 		}
 		Countdown.Instance.StartTimer(timeLimit);
+        loosingPanel.SetActive(false);
+        
+
 	}
 
 	private IEnumerator CallResetAgainRoutine()
@@ -67,11 +85,42 @@ public class GameController : MonoBehaviour
 	public void GameOver(bool win)
 	{
 		Debug.Log("Game over, did you win? " + win);
-        if (!win)
+        if (!gameOver)
+
         {
-            dude.Fallen();
+            gameOver = true;
+            if (!win)
+            {
+                loosingPanel.SetActive(true);
+            }
+            else
+            {
+                StartCoroutine(FadeInWin());
+
+            }
+            dude.Fallen(true);
+            Countdown.Instance.Stop();
+            locked = true;
         }
-        locked = true;
 
 	}
+
+
+    IEnumerator FadeInWin()
+    {
+        Color startColor = new Color (1,1,1,0);
+        winImage.color = startColor;
+        winImage.gameObject.SetActive(true);
+
+        float alpha = 0;
+
+        while(alpha < 1)
+        {
+            alpha += 0.5f * Time.deltaTime;
+            winImage.color = new Color (1,1,1, alpha);
+        yield return null;
+        }
+
+
+    }
 }

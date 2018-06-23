@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -39,4 +40,9 @@ public class Countdown : MonoBehaviour
 	{
 		label.text = string.Format("{0:F2}", SecondsLeft);
 	}
+
+    internal void Stop()
+    {
+        IsRunning = false;
+    }
 }
