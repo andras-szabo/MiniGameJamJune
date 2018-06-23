@@ -32,8 +32,11 @@ public class ForceThing : MonoBehaviour
 	{
 		var force = Input.GetAxis("Horizontal") * forceFactor;
 		force = applyConstantForce ? -force : force;
-		rb.AddForce(new Vector2(force, 0f));
 
+		if (!applyConstantForce || drunkLevel > 0f)
+		{
+			rb.AddForce(new Vector2(force, 0f));
+		}
 	}
 
 	private IEnumerator DrunkMoveRoutine()
