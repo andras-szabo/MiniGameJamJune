@@ -34,6 +34,7 @@ public class GameController : MonoBehaviour
 
 	private void Start()
 	{
+		dude.Reset();
 		Countdown.Instance.StartTimer(timeLimit);
 	}
 
@@ -43,6 +44,11 @@ public class GameController : MonoBehaviour
 		{
 			DrunkLevel += drunkIncrement;
 			dudeAnimator.MakeDudeDrink();
+		}
+
+		if (Input.GetKeyDown(KeyCode.Escape))
+		{
+			Reset();
 		}
 	}
 
