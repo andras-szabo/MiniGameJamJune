@@ -30,11 +30,10 @@ public class ForceThing : MonoBehaviour
 
 	void Update()
 	{
-		if (!applyConstantForce)
-		{
-			var force = Input.GetAxis("Horizontal") * forceFactor;
-			rb.AddForce(new Vector2(force, 0f));
-		}
+		var force = Input.GetAxis("Horizontal") * forceFactor;
+		force = applyConstantForce ? -force : force;
+		rb.AddForce(new Vector2(force, 0f));
+
 	}
 
 	private IEnumerator DrunkMoveRoutine()
@@ -43,7 +42,7 @@ public class ForceThing : MonoBehaviour
 		{
 			rb.AddForce(new Vector2(_previousForce, 0f));
 
-			var moveToRightForce = drunkLevel * myConstantForce.x * 0.5f;
+			var moveToRightForce = drunkLevel * myConstantForce.x * 0.75f;
 			var randomChange = GetRandomDrunkennessQuotient();
 			var finalForce = moveToRightForce + randomChange;
 			rb.AddForce(new Vector2(finalForce, 0f));
@@ -56,6 +55,6 @@ public class ForceThing : MonoBehaviour
 
 	private float GetRandomDrunkennessQuotient()
 	{
-		return Random.Range(-drunkLevel, drunkLevel) * myConstantForce.x * 1f;
+		return Random.Range(-drunkLevel, drunkLevel) * myConstantForce.x * 0.5f;
 	}
 }

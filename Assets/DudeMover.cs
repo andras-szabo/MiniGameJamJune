@@ -1,14 +1,26 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class DudeMover : MonoBehaviour
 {
-	public float moveFactor = 2f;
+	public float DrunkLevel { get; private set; }
+	public Transform dudeAnchor;
+	public Transform dudePointer;
 
-	private void Update()
+	private Vector3 _dudePointerInitialPosition;
+
+	private void Awake()
 	{
-		var dir = Input.GetAxis("Horizontal") * moveFactor * Time.deltaTime;
-		transform.Translate(new Vector3(dir, 0f, 0f));
+		_dudePointerInitialPosition = dudePointer.position;
+	}
+
+	public void Reset()
+	{
+		DrunkLevel = 0f;
+		dudeAnchor.position = Vector3.zero;
+		dudeAnchor.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+
+		dudePointer.SetPositionAndRotation(_dudePointerInitialPosition, Quaternion.identity);
+		dudePointer.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+		dudePointer.GetComponent<Rigidbody2D>().angularVelocity = 0f;
 	}
 }
