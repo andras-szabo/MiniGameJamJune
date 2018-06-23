@@ -34,6 +34,13 @@ public class ForceThing : MonoBehaviour
 		force = applyConstantForce ? -force : force;
 		rb.AddForce(new Vector2(force, 0f));
 
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+
+            drunkLevel += 1f;
+        }
+
+
 	}
 
 	private IEnumerator DrunkMoveRoutine()
