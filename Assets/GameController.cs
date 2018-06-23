@@ -4,7 +4,16 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour 
 {
+	public float timeLimit = 15f;
+
+	[Range(1f, 12f)]
+	public float drunkIncrement = 1f;
+
+	[Range(0.1f, 2f)]
+	public float drinkingDuration;
+
 	public DudeMover dude;
+	public DudeAnimator dudeAnimator;
 
 	public static GameController Instance;
 
@@ -20,13 +29,20 @@ public class GameController : MonoBehaviour
 	{
 		DrunkLevel = 0f;
 		dude.Reset();
+		Countdown.Instance.StartTimer(timeLimit);
+	}
+
+	private void Start()
+	{
+		Countdown.Instance.StartTimer(timeLimit);
 	}
 
 	private void Update()
 	{
 		if (Input.GetKeyDown(KeyCode.Space))
 		{
-			DrunkLevel += 1f;
+			DrunkLevel += drunkIncrement;
+			dudeAnimator.MakeDudeDrink();
 		}
 	}
 
