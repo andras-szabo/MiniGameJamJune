@@ -2789,11 +2789,11 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
   ForceModule:
-    enabled: 0
+    enabled: 1
     x:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: -0.03
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -5300,7 +5300,7 @@ Transform:
   m_GameObject: {fileID: 1086526589}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: -0.8, y: 0.48, z: 0}
-  m_LocalScale: {x: 0.13168375, y: 0.26336762, z: 0.26336762}
+  m_LocalScale: {x: 0.08, y: 0.08, z: 0.08}
   m_Children: []
   m_Father: {fileID: 1755456677}
   m_RootOrder: 0
