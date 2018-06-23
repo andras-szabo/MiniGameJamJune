@@ -28,6 +28,8 @@ public class DudeMover : MonoBehaviour
 
     public void Reset()
 	{
+
+        pointerRB.freezeRotation = false;
 		DrunkLevel = 0f;
 		dudeAnchor.position = Vector3.zero;
 		anchorRB.velocity = Vector3.zero;
