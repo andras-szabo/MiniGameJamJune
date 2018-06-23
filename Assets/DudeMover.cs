@@ -31,6 +31,7 @@ public class DudeMover : MonoBehaviour
 		DrunkLevel = 0f;
 		dudeAnchor.position = Vector3.zero;
 		anchorRB.velocity = Vector3.zero;
+		anchorRB.angularVelocity = 0f;
 
 		dudePointer.SetPositionAndRotation(_dudePointerInitialPosition, Quaternion.identity);
 		pointerRB.velocity = Vector3.zero;
