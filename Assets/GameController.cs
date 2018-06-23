@@ -26,11 +26,21 @@ public class GameController : MonoBehaviour
 		DrunkLevel = 0f;
 	}
 
-	public void Reset()
+	public void Reset(bool startResetAgain = true)
 	{
 		DrunkLevel = 0f;
 		dude.Reset();
+		if (startResetAgain)
+		{
+			StartCoroutine(CallResetAgainRoutine());
+		}
 		Countdown.Instance.StartTimer(timeLimit);
+	}
+
+	private IEnumerator CallResetAgainRoutine()
+	{
+		yield return new WaitForSeconds(0.2f);
+		Reset(startResetAgain: false);
 	}
 
 	private void Start()
